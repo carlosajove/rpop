@@ -10,9 +10,9 @@ Speaks the same DDS interface that xr_teleoperate uses in simulation mode (domai
 and serves the head camera the way teleimager does (ZMQ config responder on :60000, JPEG stream on :55555),
 so xr_teleoperate needs no code changes:
 
-  conda activate tv; cd ~/projects/unitree-r1/r1_mujoco
+  conda activate tv; cd ~/projects/rpop/r1_mujoco
   python r1_mujoco_sim.py [--rake-length 0.8]                # terminal 1
-  cd ~/projects/unitree-r1/xr_teleoperate/teleop
+  cd ~/projects/rpop/xr_teleoperate/teleop
   python teleop_hand_and_arm.py --arm R1_A5 --ee brainco --sim --img-server-ip 127.0.0.1   # terminal 2
 
 Joint torques are PD from the LowCmd (kp, kd, q, dq, tau) exactly as the real motor controller would apply them.

@@ -5,7 +5,7 @@
 
 The USD asset is produced by ``scripts/tools/build_r1_asset.sh`` (Isaac Lab URDF converter with fixed
 joints merged, then ``patch_contact_report.py``).  Its location is taken from the ``R1_USD_DIR`` environment variable so
-the same config works on any machine; the default matches the layout ``~/projects/unitree-r1/r1_usd``.
+the same config works on any machine; the default is ``<repo>/r1_usd`` next to this package.
 
 Joint naming (from the URDF, identical left/right):
     legs:  {side}_hip_pitch_joint, {side}_hip_roll_joint, {side}_hip_yaw_joint, {side}_knee_joint,
@@ -25,7 +25,8 @@ import isaaclab.sim as sim_utils
 from isaaclab.actuators import ImplicitActuatorCfg
 from isaaclab.assets.articulation import ArticulationCfg
 
-R1_USD_DIR = os.environ.get("R1_USD_DIR", os.path.expanduser("~/projects/unitree-r1/r1_usd"))
+_REPO_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), *[".."] * 5))  # <repo>/r1_lab/source/r1_lab/r1_lab/assets
+R1_USD_DIR = os.environ.get("R1_USD_DIR", os.path.join(_REPO_ROOT, "r1_usd"))
 """Directory holding the imported R1 USD assets. Override with the ``R1_USD_DIR`` env var."""
 
 R1_CFG = ArticulationCfg(

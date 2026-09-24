@@ -39,7 +39,7 @@ Diagnosis of the hop: `feet_air_time_positive_biped` = min(stance contact time, 
 
 
 ## MuJoCo + xr_teleoperate (2026-09-17)
-- New project dir `~/projects/unitree-r1/r1_mujoco/` (README there). Conda env `tv` (`~/miniforge3`, Python 3.10, pinocchio 3.1.0 + casadi, mujoco 3.8.0, xr_teleoperate + teleimager + televuer + dex-retargeting + unitree_sdk2_python editable, `params-proto<3` needed for vuer 0.0.60).
+- New project dir `~/projects/rpop/r1_mujoco/` (README there). Conda env `tv` (`~/miniforge3`, Python 3.10, pinocchio 3.1.0 + casadi, mujoco 3.8.0, xr_teleoperate + teleimager + televuer + dex-retargeting + unitree_sdk2_python editable, `params-proto<3` needed for vuer 0.0.60).
 - `xr_teleoperate/` (with submodules), `unitree_sdk2_python/`, `unitree_sdk2/` (C++, built + installed to `~/.local`), `brainco_hand_service/` cloned. BrainCo service needs `sudo apt install libspdlog-dev libfmt-dev libyaml-cpp-dev libboost-program-options-dev`, then `bash setup_brainco_service.sh`.
 - MuJoCo model: `r1_mujoco/build_r1_scene.py` builds the standing R1 (legs frozen at hip -0.20/knee 0.42/ankle -0.23, pelvis 0.728 m, head 1.217 m) with BrainCo hands from `xr_teleoperate/assets/brainco_hand`. Unitree's R1.urdf `<mujoco meshdir="meshes">` + `filename="meshes/..."` doubles the path: fixed copy in `r1_mujoco/assets/R1_fixed.urdf`.
 - Sim for teleop: `r1_mujoco/run_sim.sh` then `run_teleop.sh` (xr_teleoperate `--arm R1_A5 --ee brainco --sim --img-server-ip 127.0.0.1`). Verified end-to-end without headset: arm + hand controllers initialise, `rt/lowstate` 250 Hz, camera served. Pico URL `https://192.168.1.84:8012/?ws=wss://192.168.1.84:8012`; certs in `~/.config/xr_teleoperate/`.

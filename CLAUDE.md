@@ -18,7 +18,7 @@ all EDU variants share the 26-DoF body (5-DoF arms); U6 adds BrainCo Revo 2 hand
 - `xr_teleoperate/`, `unitree_sdk2_python/`, `unitree_sdk2/`, `brainco_hand_service/`  Unitree teleop stack (installed in `tv`; C++ sdk installed to `~/.local`).
 - `r1_lab/`                         Isaac Lab external project (git repo, uncommitted changes as of 2026-09-10). Tasks `Isaac-Velocity-{Flat,Rough}-R1-v0` (+ `-Play-v0`).
 
-## Everyday commands (always: `source ~/venvs/isaaclab30-sim601-py312/bin/activate; export OMNI_KIT_ACCEPT_EULA=YES; cd ~/projects/unitree-r1/r1_lab`)
+## Everyday commands (always: `source ~/venvs/isaaclab30-sim601-py312/bin/activate; export OMNI_KIT_ACCEPT_EULA=YES; cd ~/projects/rpop/r1_lab`)
 - Train:   `python scripts/rsl_rl/train.py --task Isaac-Velocity-Flat-R1-v0 --num_envs 4096 --max_iterations 3000 --run_name <name>`  (~0.7 s/iter; headless by default; do NOT use `--video` in training, it renders all envs and is 20x slower)
 - Watch:   `python scripts/rsl_rl/play.py --task Isaac-Velocity-Flat-R1-Play-v0 --num_envs 50 --viz kit --real-time [--checkpoint <run>/model_N.pt]`
 - Eval:    `python scripts/rsl_rl/eval_policy.py --task Isaac-Velocity-Flat-R1-Play-v0 --num_envs 200 --checkpoint <run>/model_N.pt --eval_steps 500`  (height, tilt, tracking error, terminations by cause, foot contact split)

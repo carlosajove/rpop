@@ -8,7 +8,7 @@ key frames.  Optionally streams the solution to the running r1_mujoco_sim bridge
 R1_A5_ArmController does, so you can watch it in the MuJoCo viewer.
 
 Run from the tv env:
-    cd ~/projects/unitree-r1/r1_mujoco && python test_r1_ik_offline.py [--dds] [--rake-length 0.8]
+    cd ~/projects/rpop/r1_mujoco && python test_r1_ik_offline.py [--dds] [--rake-length 0.8]
 """
 import argparse, os, sys, time, json
 import numpy as np

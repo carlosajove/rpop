@@ -7,8 +7,8 @@
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-URDF="${R1_URDF:-$HOME/projects/unitree-r1/unitree_ros/robots/r1_description/R1.urdf}"
-OUT_DIR="${R1_USD_DIR:-$HOME/projects/unitree-r1/r1_usd}/R1_body_merged"
+URDF="${R1_URDF:-$HOME/projects/rpop/unitree_ros/robots/r1_description/R1.urdf}"
+OUT_DIR="${R1_USD_DIR:-$HOME/projects/rpop/r1_usd}/R1_body_merged"
 ISAACLAB_PATH="${ISAACLAB_PATH:-$HOME/IsaacLab}"
 export OMNI_KIT_ACCEPT_EULA=YES
 
