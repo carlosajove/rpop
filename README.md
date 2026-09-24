@@ -1,7 +1,7 @@
 # rpop
 
 Unitree R1 humanoid: Isaac Lab training, MuJoCo simulation, VR teleoperation.
-Private repo: https://github.com/carlosajove/rpop
+
 
 ## Layout
 
