@@ -1,0 +1,4 @@
+[submodule "xr_teleoperate"]
+	path = xr_teleoperate
+	url = https://github.com/carlosajove/xr_teleoperate.git
+	branch = rpop
