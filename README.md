@@ -13,8 +13,21 @@ Unitree R1 humanoid: Isaac Lab training, MuJoCo simulation, VR teleoperation.
 | setup_brainco_service.sh | Installs the BrainCo hand service (systemd). |
 | CLAUDE.md | Working notes and everyday commands. |
 
-Third-party checkouts are expected next to these folders and are git-ignored. Clone them yourself:
-`xr_teleoperate`, `unitree_ros`, `unitree_sdk2`, `unitree_sdk2_python`, `brainco_hand_service` from https://github.com/unitreerobotics.
+| xr_teleoperate/ | **Submodule**: our fork of Unitree's VR teleop stack, branch `rpop` (carries our arm-IK and BrainCo-hand changes; its nested `televuer` submodule points at our televuer fork, branch `rpop`). |
+
+Other Unitree checkouts (`unitree_ros`, `unitree_sdk2`, `unitree_sdk2_python`, `brainco_hand_service`) are git-ignored; clone them from https://github.com/unitreerobotics if you need them.
+
+## Clone
+
+    git clone --recurse-submodules git@github.com:carlosajove/rpop.git
+    # already cloned without submodules?  git submodule update --init --recursive
+
+## Submodule cheat-sheet (xr_teleoperate)
+
+- Edit inside `xr_teleoperate/` (or `xr_teleoperate/teleop/televuer/`), commit **there** on branch `rpop`, push to the fork.
+  Then in rpop: `git add xr_teleoperate && git commit -m "bump xr_teleoperate"` so rpop points at the new commit.
+- After `git pull` in rpop, run `git submodule update --recursive` to move the submodule to the recorded commit.
+- Pull Unitree's upstream fixes: in `xr_teleoperate/`, `git fetch origin && git rebase origin/main` (origin = unitreerobotics, fork = carlosajove).
 
 ## Environment
 
