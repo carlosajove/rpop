@@ -1,0 +1,7 @@
+# generated outputs live in /data, never in git
+out/
+*.npz
+*.log
+MUJOCO_LOG.TXT
+__pycache__/
+*.pyc
