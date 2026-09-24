@@ -1,0 +1,144 @@
+<title>R1 Rake Reach Study</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --paper:#f6f7f4; --ink:#1d2730; --ink-2:#4a5761; --rule:#cfd5d8; --panel:#eceef0;
+  --accent:#d4621f; --accent-ink:#8d3f0f; --steel:#37627f; --ok:#2f7a4a; --meh:#b0801d; --no:#a34a3a;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --paper:#161b1f; --ink:#e6e9e8; --ink-2:#a9b3ba; --rule:#3a444b; --panel:#1f262c;
+  --accent:#e8843f; --accent-ink:#f2a56d; --steel:#7fb0cf; --ok:#6fc48a; --meh:#d9ab4a; --no:#e07d6a; }}
+:root[data-theme="dark"]{
+  --paper:#161b1f; --ink:#e6e9e8; --ink-2:#a9b3ba; --rule:#3a444b; --panel:#1f262c;
+  --accent:#e8843f; --accent-ink:#f2a56d; --steel:#7fb0cf; --ok:#6fc48a; --meh:#d9ab4a; --no:#e07d6a; }
+body{background:var(--paper);color:var(--ink);font-family:"IBM Plex Sans",system-ui,sans-serif;font-size:16px;line-height:1.5;padding-inline:clamp(16px,4vw,48px);padding-block:32px 64px;}
+.wrap{max-width:1100px;margin:0 auto;}
+h1,h2,h3{font-family:"Barlow Condensed","Arial Narrow",sans-serif;text-wrap:balance;margin:0;line-height:1.05;}
+h1{font-size:clamp(40px,6vw,64px);font-weight:700;letter-spacing:-0.01em;}
+h2{font-size:30px;font-weight:600;margin-top:56px;padding-top:12px;border-top:2px solid var(--ink);}
+h3{font-size:20px;font-weight:600;margin-top:24px;color:var(--steel);}
+.eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-2);}
+.lede{font-size:19px;max-width:62ch;color:var(--ink-2);margin-top:12px;}
+p{max-width:68ch;margin:12px 0;}
+.mono,.num{font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums;}
+.hero{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:start;margin-top:28px;}
+.hero img{width:100%;max-width:100%;border:1px solid var(--rule);}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);}
+.fig{background:var(--panel);padding:14px 16px;}
+.fig .v{font-family:"Barlow Condensed",sans-serif;font-size:40px;font-weight:700;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums;}
+.fig .v small{font-size:18px;font-weight:600;color:var(--ink-2);margin-left:2px;}
+.fig .l{font-size:13px;color:var(--ink-2);margin-top:6px;}
+.spec{border:1px solid var(--ink);margin-top:20px;}
+.spec .head{display:flex;justify-content:space-between;gap:16px;padding:10px 16px;border-bottom:1px solid var(--ink);background:var(--panel);font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;}
+.spec dl{display:grid;grid-template-columns:max-content 1fr;gap:0;margin:0;}
+.spec dt,.spec dd{padding:10px 16px;border-bottom:1px solid var(--rule);margin:0;}
+.spec dt{font-family:"IBM Plex Mono",monospace;font-size:13px;color:var(--ink-2);background:var(--panel);}
+.spec dd .num{color:var(--accent-ink);font-weight:500;}
+.spec dt:nth-last-of-type(1),.spec dd:last-of-type{border-bottom:0;}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums;margin-top:12px;}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--rule);vertical-align:top;}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-2);border-bottom:2px solid var(--ink);}
+tbody th{font-family:"IBM Plex Mono",monospace;font-weight:500;white-space:nowrap;}
+td.ok{color:var(--ok);} td.meh{color:var(--meh);} td.no{color:var(--no);}
+td .sub{font-size:12px;color:var(--ink-2);}
+.tablewrap{overflow-x:auto;}
+.note{border-left:3px solid var(--accent);padding:6px 14px;background:var(--panel);max-width:70ch;margin:18px 0;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+figure{margin:20px 0;} figure img{width:100%;max-width:100%;border:1px solid var(--rule);background:#fff;} figcaption{font-size:13px;color:var(--ink-2);margin-top:6px;max-width:80ch;}
+ul{max-width:70ch;padding-left:20px;} li{margin:6px 0;}
+.foot{margin-top:56px;padding-top:12px;border-top:1px solid var(--rule);font-size:13px;color:var(--ink-2);}
+@media (max-width:760px){ .hero,.grid2{grid-template-columns:1fr;} .spec dl{grid-template-columns:1fr;} .spec dt{border-bottom:0;padding-bottom:2px;} }
+</style>
+<div class="wrap">
+<div class="eyebrow">Unitree R1 EDU · 5-DoF arms · BrainCo Revo 2 hands · MuJoCo kinematic study · 17 Sep 2026</div>
+<h1>R1 Rake Reach Study</h1>
+<p class="lede">How far the standing R1 can reach with its hands, where a rake head can touch the floor, and what the rake has to look like so the robot can actually use it. Legs frozen in the standing pose, no walking, no bending, no torso pitch (the R1 has none).</p>
+
+<div class="hero">
+  <div>
+    <div class="figs">
+      <div class="fig"><div class="v">{{ZMIN}}<small>m</small></div><div class="l">lowest point a hand can reach above the floor</div></div>
+      <div class="fig"><div class="v">{{XMAX}}<small>m</small></div><div class="l">max forward reach of a hand (at 0.9–1.1 m height)</div></div>
+      <div class="fig"><div class="v">{{VOL}}<small>m³</small></div><div class="l">workspace volume per hand ({{VOLW}} m³ using the waist turn)</div></div>
+      <div class="fig"><div class="v">1.2<small>m</small></div><div class="l">rake head reach ahead of the toes with a 1.0 m handle and an angled grip</div></div>
+    </div>
+    <div class="spec">
+      <div class="head"><span>Rake spec · recommended</span><span>one hand, right-handed default</span></div>
+      <dl>
+        <dt>handle, lower hand → head</dt><dd><span class="num">1.0 m</span> (works 0.9–1.1 m). 0.8 m is the minimum that reaches the floor at a useful angle; 0.6 m does not.</dd>
+        <dt>grip</dt><dd><b>Angled grip, 45–60° to the handle</b> (D-grip / pistol grip / scythe-style nib) or a forearm cuff that puts the handle along the forearm. The R1 wrist only rolls, so a plain handle held across the palm is locked perpendicular to the forearm and barely reaches the floor.</dd>
+        <dt>second hand</dt><dd>Loose guide (ring / sleeve the left hand can slide along) about <span class="num">25–35 cm</span> up the shaft. A rigid two-hand grip is possible only in a few static poses, not through a stroke.</dd>
+        <dt>total length</dt><dd><span class="num">≈1.3 m</span> (1.0 m below the grip + 0.3 m for the guide hand).</dd>
+        <dt>working angle</dt><dd>handle <span class="num">30–60°</span> to the floor; stroke zone <span class="num">0.3–1.2 m</span> ahead of the toes, <span class="num">±0.9 m</span> sideways; lower hand at <span class="num">0.5–0.9 m</span> height.</dd>
+        <dt>head</dt><dd>≤ <span class="num">40 cm</span> wide, light tines; whole rake ≤ <span class="num">1.2 kg</span> (elbow / wrist motors are 33 N·m).</dd>
+        <dt>handle diameter</dt><dd><span class="num">28–32 mm</span> round, to sit in the BrainCo power grasp (grasp centre 5.5 cm up the palm).</dd>
+      </dl>
+    </div>
+  </div>
+  <div>
+    <img src="{{IMG_SCENE}}" alt="MuJoCo render of the standing R1 with BrainCo hands holding a rake, head on the floor ahead of the feet">
+    <figcaption>The MuJoCo model used for every number here: Unitree's R1 URDF with the legs frozen at the standing pose, BrainCo hand URDFs on the wrist flanges, a rake welded into the right grasp.</figcaption>
+  </div>
+</div>
+
+<h2>Numbers for the set designer</h2>
+<div class="grid2">
+<div>
+<h3>Robot</h3>
+<ul>
+  <li>Standing height <span class="num">1.22 m</span>; pelvis <span class="num">0.73 m</span>; shoulder axis <span class="num">0.97 m</span>.</li>
+  <li>Footprint: heel <span class="num">5 cm</span> behind to toe <span class="num">13 cm</span> ahead of the pelvis line; feet <span class="num">~30 cm</span> apart outside-to-outside.</li>
+  <li>Arm cannot cross the body midline: shoulder roll allows <span class="num">13°</span> inward, <span class="num">142°</span> outward. Right hand works the right half-space, left hand the left; the shared zone is the narrow band <span class="num">±27 cm</span> in front of the chest ({{OVL}} m³).</li>
+</ul>
+<h3>Hands (grasp point)</h3>
+<ul>
+  <li>Height band <span class="num">{{ZMIN}}–{{ZMAX}} m</span>. Nothing the hands must grab should sit below <span class="num">0.5 m</span>; put handles, hooks and table tops at <span class="num">0.7–1.1 m</span>.</li>
+  <li>Forward reach by height: <span class="num">{{R05}} m</span> at 0.5 m, <span class="num">{{R07}}</span> at 0.7, <span class="num">{{R09}}</span> at 0.9, <span class="num">{{R11}}</span> at 1.1, <span class="num">{{R13}}</span> at 1.3 m.</li>
+  <li>Sideways: to <span class="num">0.64 m</span> on the hand's own side, only <span class="num">0.24 m</span> across. With the waist turned (±150°) either hand covers <span class="num">±0.63 m</span> and <span class="num">{{XMAXW}} m</span> ahead.</li>
+  <li>Volume <span class="num">{{VOL}} m³</span> per hand at 2 cm resolution ({{VOL5}} m³ at 5 cm), collision-free poses only.</li>
+</ul>
+</div>
+<figure><img src="{{IMG_WS}}" alt="Side, front and top projections of the reachable hand workspace"><figcaption>Reachable grasp-point workspace, 1 000 000 random arm poses per arm filtered for self-collision. Blue right hand, red left, green both. The horizontal orange line is the 0.46 m floor of the workspace.</figcaption></figure>
+</div>
+
+<h2>Rake: can the head touch the floor?</h2>
+<p>Criterion: rake head within 5 cm of the floor, at least 30 cm ahead of the toes, handle inclined 25–60° (steeper is poking, flatter cannot pull). Footprint = floor area the head can be placed on from a standing position, one hand, collision-free. The grip angle is the angle between the handle and the fingers: 0° is a plain handle across the palm, 90° puts the handle along the forearm.</p>
+<div class="tablewrap">
+<table>
+<thead><tr><th>handle length</th><th>plain grip 0°</th><th>angled grip 45°</th><th>angled grip 60°</th><th>along forearm 90°</th></tr></thead>
+<tbody>{{RAKE_TABLE}}</tbody>
+</table>
+</div>
+<figure><img src="{{IMG_RAKE}}" alt="Top-view floor footprints of the rake head for 0.6, 0.8, 1.0 and 1.2 m handles"><figcaption>Where the right hand can put the rake head on the floor (best grip angle per length). Colour is the handle angle to the floor. The dark rectangle is the robot's feet.</figcaption></figure>
+<div class="note"><b>Why the grip matters.</b> The R1 wrist has one axis (roll about the forearm). Anything held across the palm is therefore always perpendicular to the forearm, and getting a 1 m shaft down to the floor in front means holding the forearm up at an awkward angle that the shoulder rarely allows. An angled grip lets the shaft point down-forward while the forearm stays in its comfortable band. Same reason a two-hand grip on a straight shaft is so constrained.</div>
+<h3>Cross-check with the rake as a rigid body in the simulation</h3>
+<p>Same criterion, but the rake (handle, 40 cm head, tines) is part of the model and its contacts with the legs, torso and the other arm count as collisions. Share of random arm poses in which the head is on the floor ahead of the toes:</p>
+<div class="tablewrap"><table><thead><tr><th>rake</th><th>kinematic only</th><th>with collisions</th><th>footprint</th></tr></thead><tbody>{{COLL_TABLE}}</tbody></table></div>
+
+<h2>Two hands on one handle</h2>
+<p>Closed-chain test over 7 560 handle poses (position grid in front of the robot, 7 pitches, 6 yaws, three hand separations): per hand, a bounded IK solves for the grasp point on the shaft and the shaft lying across the palm; the combined pose is then collision-checked.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>hands apart</th><th>both hands rigid on the shaft</th><th>one rigid + second within 3 cm, free orientation</th></tr></thead>
+<tbody>
+<tr><th>25 cm</th><td><span class="num">{{TH25B}} %</span> of poses</td><td><span class="num">{{TH25L}} %</span></td></tr>
+<tr><th>35 cm</th><td><span class="num">{{TH35B}} %</span></td><td><span class="num">{{TH35L}} %</span></td></tr>
+<tr><th>45 cm</th><td><span class="num">{{TH45B}} %</span></td><td><span class="num">{{TH45L}} %</span></td></tr>
+</tbody></table></div>
+<ul>
+  <li>Rigid two-hand grips exist only with the shaft running diagonally across the body (left hand high on the left, right hand low on the right, shaft yawed 30–60°), at hand heights <span class="num">0.7–1.3 m</span>, never with both hands low.</li>
+  <li>They are isolated poses: moving the shaft through a raking stroke leaves the feasible set almost immediately. <b>Design for one rigid hand plus a loose second</b>, or give the shaft two grips each angled to its own forearm.</li>
+</ul>
+
+<h2>Teleoperation check</h2>
+<p>xr_teleoperate's own R1 5-DoF IK (the code that will drive the real robot) was fed a scripted rake stroke and evaluated in the same MuJoCo model: <span class="num">1.3 ms</span> per solve, under <span class="num">1 cm</span> error inside the workspace, joint limits respected. Targets outside the workspace are pulled to the nearest reachable pose (11 cm error for a hand asked to go 0.48 m ahead at 0.55 m height), which is what the operator will feel as the robot "not following" low, far-forward hand positions. The full xr_teleoperate stack now runs against the MuJoCo model instead of the robot, so strokes can be practised in the Pico 4 before delivery.</p>
+
+<h2>Method and caveats</h2>
+<ul>
+  <li>Model: Unitree <span class="mono">r1_description/R1.urdf</span> (same arms as <span class="mono">r1_a5</span>) compiled in MuJoCo 3.8; 12 leg joints removed at hip −0.20 / knee 0.42 / ankle −0.23 rad; pelvis raised so the soles touch the floor. Straight legs add 1.3 cm to every height.</li>
+  <li>Hands: BrainCo Revo 2 URDFs from xr_teleoperate mounted 14 cm along the wrist axis with Unitree's G1 convention (fingers along the forearm, palms facing in). The exact flange offset is inferred from the wrist mesh (±1 cm). Grasp centre 2.5 cm off the palm, 5.5 cm up from the hand base.</li>
+  <li>Reach = random uniform sampling of the 5 arm joints (waist yaw optional), 1 000 000 poses per arm, poses with self/ground collision removed (12–14 %). Volumes are voxel counts and grow slightly with more samples.</li>
+  <li>Kinematics only: no joint torque, payload or balance check. The rake mass bound comes from the 33 N·m elbow/wrist limits.</li>
+  <li>All coordinates are relative to the pelvis: x ahead, y to the robot's left, z above the floor.</li>
+</ul>
+<div class="foot">Files: <span class="mono">~/projects/unitree-r1/r1_mujoco/</span> (scenes, scripts, JSON results, figures). Reproduce with <span class="mono">build_r1_scene.py</span>, <span class="mono">reach_analysis.py</span>, <span class="mono">two_hand_handle.py</span>, <span class="mono">plot_reach.py</span>, <span class="mono">build_report.py</span>.</div>
+</div>
