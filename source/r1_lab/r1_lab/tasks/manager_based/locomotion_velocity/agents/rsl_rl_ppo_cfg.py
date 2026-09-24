@@ -1,27 +1,26 @@
-# Copyright (c) 2022-2025, The Isaac Lab Project Developers (https://github.com/isaac-sim/IsaacLab/blob/main/CONTRIBUTORS.md).
-# All rights reserved.
-#
+# Copyright (c) 2026, r1_lab contributors.
 # SPDX-License-Identifier: BSD-3-Clause
 
-from isaaclab.utils.configclass import configclass
+"""PPO runner configurations for R1 locomotion (derived from Isaac Lab's G1 settings)."""
 
+from isaaclab.utils.configclass import configclass
 from isaaclab_rl.rsl_rl import RslRlMLPModelCfg, RslRlOnPolicyRunnerCfg, RslRlPpoAlgorithmCfg
 
 
 @configclass
-class PPORunnerCfg(RslRlOnPolicyRunnerCfg):
-    num_steps_per_env = 16
-    max_iterations = 150
+class R1RoughPPORunnerCfg(RslRlOnPolicyRunnerCfg):
+    num_steps_per_env = 24
+    max_iterations = 3000
     save_interval = 50
-    experiment_name = "cartpole_direct"
+    experiment_name = "r1_rough"
     actor = RslRlMLPModelCfg(
-        hidden_dims=[32, 32],
+        hidden_dims=[512, 256, 128],
         activation="elu",
         obs_normalization=False,
         distribution_cfg=RslRlMLPModelCfg.GaussianDistributionCfg(init_std=1.0),
     )
     critic = RslRlMLPModelCfg(
-        hidden_dims=[32, 32],
+        hidden_dims=[512, 256, 128],
         activation="elu",
         obs_normalization=False,
     )
@@ -29,7 +28,7 @@ class PPORunnerCfg(RslRlOnPolicyRunnerCfg):
         value_loss_coef=1.0,
         use_clipped_value_loss=True,
         clip_param=0.2,
-        entropy_coef=0.005,
+        entropy_coef=0.008,
         num_learning_epochs=5,
         num_mini_batches=4,
         learning_rate=1.0e-3,
@@ -39,3 +38,13 @@ class PPORunnerCfg(RslRlOnPolicyRunnerCfg):
         desired_kl=0.01,
         max_grad_norm=1.0,
     )
+
+
+@configclass
+class R1FlatPPORunnerCfg(R1RoughPPORunnerCfg):
+    def __post_init__(self):
+        super().__post_init__()
+        self.max_iterations = 1500
+        self.experiment_name = "r1_flat"
+        self.actor.hidden_dims = [256, 128, 128]
+        self.critic.hidden_dims = [256, 128, 128]
