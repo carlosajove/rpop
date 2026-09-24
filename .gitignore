@@ -1,0 +1,22 @@
+# Third-party checkouts living next to our code (clone them from unitreerobotics)
+/xr_teleoperate/
+/unitree_ros/
+/unitree_sdk2/
+/unitree_sdk2_python/
+/brainco_hand_service/
+
+# Generated data: lives in /data, never in git
+**/logs/
+**/out/
+*.npz
+*.log
+MUJOCO_LOG.TXT
+nohup.out
+
+# Python / editors
+**/__pycache__/
+*.pyc
+**/*.egg-info/
+**/.vscode/
+**/.idea/
+.DS_Store
